@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Financial Security Solution</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
-  <script src="script.js"></script>
+ 
+  <link rel="stylesheet" href="styles.css"> 
+  <script src="javascript/script.js"></script>
+  <!-- <script src="javascript/formvalidation.js"></script> -->
+  <script src="javascript/popup.js"></script>
   <script src="https://unpkg.com/@heroicons/vue@2.0.13/outline"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -13,93 +15,206 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="bg-gray-100">
-  <!-- Header -->
   <header class="flex items-center justify-between p-6 bg-white shadow-lg">
     <div class="flex items-center space-x-2">
-      <span class="text-2xl font-semibold text-gray-800">Fin-rec</span>
+      <div class="logo-title">IMMEDIATE <br> REFUND</div>
     </div>
     <nav class="flex space-x-6">
-      <a href="#" class="text-gray-800 hover:text-purple-600">About us</a>
-      <a href="#" class="text-gray-800 hover:text-purple-600">Solutions</a>
-      <a href="#" class="text-gray-800 hover:text-purple-600">Partners</a>
-      <a href="#" class="text-gray-800 hover:text-purple-600">Projects</a>
-      <a href="#" class="text-gray-800 hover:text-purple-600">FAQ</a>
+      <a href="#About-Us" class="text-gray-800 hover:text-purple-600">About us</a>
+      <a href="#Solutions" class="text-gray-800 hover:text-purple-600">Solutions</a>
+      <a href="#Partners" class="text-gray-800 hover:text-purple-600">Partners</a>
+      <a href="#Portfolio" class="text-gray-800 hover:text-purple-600">Projects</a>
+      <a href="#FAQ" class="text-gray-800 hover:text-purple-600">FAQ</a>
     </nav>
-    <a href="#" class="px-4 py-2 text-purple-600 border border-purple-600 rounded-full hover:bg-purple-100 transition">Log in</a>
+    <a href="login.html" class="px-4 py-2 text-purple-600 border border-purple-600 rounded-full hover:bg-purple-100 transition">Log in</a>
   </header>
 
   <!-- Main Section -->
   <section class="relative min-h-[88vh] bg-white py-24 px-8 md:px-16 lg:px-16">
     <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between">
-      <div class="max-w-2xl space-y-8">
-        <div class="space-y-4">
-          <h1 class="text-sm font-bold text-gray-800 uppercase tracking-wider">
-            don't let the violators win!
-          </h1>
-          <h2 class="text-5xl font-bold leading-tight">
-            <span class="text-purple-600">YOUR COMPLETE SOLUTION</span> FOR<br>
-            FINANCIAL SECURITY<br>
-            AND RECOVERY
-          </h2>
+        <div class="max-w-2xl space-y-8">
+            <div class="space-y-4">
+                <h1 class="text-sm font-bold text-gray-800 uppercase tracking-wider">
+                    don't let the violators win!
+                </h1>
+                <h2 class="text-5xl font-bold leading-tight">
+                    <span class="text-purple-600">YOUR COMPLETE SOLUTION</span> FOR<br>
+                    FINANCIAL SECURITY<br>
+                    AND RECOVERY
+                </h2>
+            </div>
+            
+            <p class="text-lg text-gray-600 leading-relaxed">
+                Shield your assets with Fin-rec — experts in blockchain security, compliance, recovery and insurance solutions for all things finance
+            </p>
+            
+            <div class="space-y-4">
+                <button onclick="toggleModal()" class="inline-block px-8 py-4 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors duration-300">
+                    Contact us
+                </button>
+                <p class="text-sm text-gray-500">
+                    fill out the form now for a free worldwide consultation
+                </p>
+            </div>
         </div>
-        
-        <p class="text-lg text-gray-600 leading-relaxed">
-          Shield your assets with Fin-rec — experts in blockchain security, compliance, recovery and insurance solutions for all things finance
-        </p>
-        
-        <div class="space-y-4">
-          <a href="#form" class="inline-block px-8 py-4 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition-colors duration-300">
-            Contact us
-          </a>
-          <p class="text-sm text-gray-500">
-            fill out the form now for a free worldwide consultation
-          </p>
+        <div class="right-section">
+          <div class="vault-container">
+            <div class="vault-shape"></div>
+            <img src="lock-image.png" alt="Security Vault"  class="vault-image">
+          </div>
         </div>
-      </div>
-      
-      <div class="right-section">
-        <div class="vault-container">
-          <div class="vault-shape"></div>
-          <img src="lock-image.png" alt="Security Vault"  class="vault-image">
-        </div>
-      </div>
     </div>
-    
-      </div>
+</section>
+
+<!-- Modal backdrop -->
+<div id="modal-backdrop" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity"></div>
+
+<!-- Modal container -->
+<div id="modal-container" class="hidden fixed inset-0 z-50 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen px-4">
+        <div class="relative bg-white w-full max-w-lg rounded-lg shadow-xl">
+            <button onclick="toggleModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <iframe id="form-iframe" src="popupform.html" class="w-full h-[90vh] rounded-lg"></iframe>
+        </div>
     </div>
-  </section>
+</div>
+  
   <!-- Consultation Form Section -->
-  <section class="bg-gray-800 text-white p-8 rounded-lg  max-l-7xl mx-auto px-8 py-20 flex flex-col lg:flex-row items-start space-y-8 lg:space-y-0 lg:space-x-8">
-    <!-- Left Side Content -->
-    <div class="flex-1 space-y-4">
-      <h3 class="text-sm font-semibold text-gray-300">CONSULTATION</h3>
-      <h2 class="text-3xl font-bold text-purple-500 leading-tight">
-        GET A FREE CONSULTATION & <br> JOIN OUR COMMUNITY OF <br> PROTECTED CLIENTS
+<div class="consultation-card">
+  <div class="card-grid">
+    <div class="content-section">
+      <div class="subtitle">CONSULTATION</div>
+      <h2 class="consultation-title">
+        GET A FREE<br>
+        CONSULTATION &<br>
+        JOIN OUR<br>
+        COMMUNITY OF<br>
+        PROTECTED CLIENTS
       </h2>
-      <p class="text-gray-400">
+      <p class="description">
         Do not hesitate to contact us for a free consultation if you have become a victim of scammers. Our specialists will contact you and help you solve the problem.
       </p>
     </div>
-    <!-- Right Side Form -->
-    <div class="flex-1 space-y-4">
-      <form class="space-y-4">
-        <input type="text" placeholder="First Name" class="w-full px-4 py-3 bg-gray-700 text-white rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500">
-        <input type="text" placeholder="Last Name" class="w-full px-4 py-3 bg-gray-700 text-white rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500">
-        <input type="email" placeholder="Valid E-mail" class="w-full px-4 py-3 bg-gray-700 text-white rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500">
-        <div class="relative">
-          <select class="w-full px-4 py-3 bg-gray-700 text-white rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500">
-            <option>🇷🇺 +7 (999) 999-99-99</option>
-            <!-- Add more options here if needed -->
+    
+    <div class="form-section" id="initial-form">
+      <div class="input-group">
+        <input type="text" class="form-input" placeholder="First Name" required>
+      </div>
+      <div class="input-group">
+        <input type="text" class="form-input" placeholder="Last Name" required>
+      </div>
+      <div class="input-group">
+        <input type="email" class="form-input" placeholder="Valid E-mail" required>
+      </div>
+      <div class="input-group">
+        <div class="phone-input">
+          <select class="country-select" id="countrySelect" required>
+            <option value="+1" data-flag="us.png">United States (+1)</option>
+            <option value="+44" data-flag="gb.png">United Kingdom (+44)</option>
+            <option value="+254" data-flag="ke.png">Kenya (+254)</option>
           </select>
+          <input type="tel" class="form-input" placeholder="Enter phone number" style="flex: 1" required>
         </div>
-        <button type="submit" class="w-full px-4 py-3 text-white bg-purple-600 rounded-lg shadow-lg transform transition hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2">
-          Next
-        </button>
-      </form>
+      </div>
+      <button class="submit-btn" onclick="showMarketSelection()">Next</button>
     </div>
-  </section>
+    
+    <!-- Market Selection Form -->
+    <div class="form-section hidden" id="market-selection">
+      <h3 class="text-xl font-bold mb-4">Select Your Market</h3>
+      <div class="market-options grid grid-cols-2 gap-4">
+        <label class="market-option">
+          <input type="radio" name="market" value="crypto" required>
+          <span class="option-text">Crypto</span>
+        </label>
+        <label class="market-option">
+          <input type="radio" name="market" value="forex" required>
+          <span class="option-text">Forex</span>
+        </label>
+        <label class="market-option">
+          <input type="radio" name="market" value="nft" required>
+          <span class="option-text">NFT</span>
+        </label>
+        <label class="market-option">
+          <input type="radio" name="market" value="defi" required>
+          <span class="option-text">DeFi</span>
+        </label>
+        <label class="market-option">
+          <input type="radio" name="market" value="trading" required>
+          <span class="option-text">Trading</span>
+        </label>
+        <label class="market-option">
+          <input type="radio" name="market" value="banking" required>
+          <span class="option-text">Banking</span>
+        </label>
+      </div>
+      <button class="submit-btn mt-6" onclick="showDurationSelection()">Next</button>
+    </div>
+    
+    <!-- Duration Selection Form -->
+    <div class="form-section hidden" id="duration-selection">
+      <h3 class="text-xl font-bold mb-4">Select Duration of Investment</h3>
+      <div class="duration-options grid grid-cols-2 gap-4">
+        <label class="duration-option">
+          <input type="radio" name="duration" value="1-2" required>
+          <span class="option-text">1-2 Months</span>
+        </label>
+        <label class="duration-option">
+          <input type="radio" name="duration" value="2-5" required>
+          <span class="option-text">2-5 Months</span>
+        </label>
+        <label class="duration-option">
+          <input type="radio" name="duration" value="5-12" required>
+          <span class="option-text">5-12 Months</span>
+        </label>
+        <label class="duration-option">
+          <input type="radio" name="duration" value="12+" required>
+          <span class="option-text">12+ Months</span>
+        </label>
+      </div>
+      <button class="submit-btn mt-6" onclick="showLanguageSelection()">Next</button>
+    </div>
+    
+    <!-- Language Selection Form -->
+    <div class="form-section hidden" id="language-selection">
+      <h3 class="text-xl font-bold mb-4">Select Your Preferred Language</h3>
+      <div class="language-options grid grid-cols-2 gap-4">
+        <label class="language-option">
+          <input type="radio" name="language" value="english" required>
+          <span class="option-text">English</span>
+        </label>
+        <label class="language-option">
+          <input type="radio" name="language" value="french" required>
+          <span class="option-text">French</span>
+        </label>
+        <label class="language-option">
+          <input type="radio" name="language" value="german" required>
+          <span class="option-text">German</span>
+        </label>
+        <label class="language-option">
+          <input type="radio" name="language" value="spanish" required>
+          <span class="option-text">Spanish</span>
+        </label>
+        <label class="language-option">
+          <input type="radio" name="language" value="chinese" required>
+          <span class="option-text">Chinese</span>
+        </label>
+        <label class="language-option">
+          <input type="radio" name="language" value="arabic" required>
+          <span class="option-text">Arabic</span>
+        </label>
+      </div>
+      <button class="submit-btn mt-6" onclick="submitFinalForm()">Submit</button>
+    </div>
+  </div>    
+</div>
+
 <!-- Overlapping Scroll Section -->
-<section class="bg-blue-50 py-12">
+<section id="1" class="bg-blue-50 py-12">
   <div class="max-w-lg mx-auto px-4 relative">
     <h2 class="text-left text-xl font-bold text-gray-700 mb-6">HOW IT WORKS</h2>
     
@@ -130,7 +245,7 @@
 
 
 <!-- About Section -->
-<section class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-20">
+<section id="About-Us" class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-20">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <!-- Left Column -->
             <div class="space-y-8">
@@ -187,7 +302,7 @@
     </section>
 
     <!-- Solutions Section -->
-<section class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-20">
+<section id="Solutions" class="max-w-7xl mx-auto px-4 md:px-8 lg:px-16 py-20">
         <div class="space-y-12">
             <!-- Header -->
             <div class="space-y-6">
@@ -381,7 +496,7 @@
     </section>
     
     <!-- Partners Section -->
-  <section class="w-full max-w-4xl mx-auto px-6 py-12 flex flex-col sm:flex-row space-y-6 sm:space-y-0">
+  <section id = "Partners"class="w-full max-w-4xl mx-auto px-6 py-12 flex flex-col sm:flex-row space-y-6 sm:space-y-0">
     <!-- Left Side - Partner Label -->
     <div class="flex-shrink-0 sm:w-1/4 flex items-start">
       <h2 class="text-lg font-semibold text-gray-800 tracking-wide uppercase">Partners</h2>
@@ -398,188 +513,231 @@
       </p>
     </div>
   </section>
-  <!-- Governmental-->
+<!-- Governmental Section -->
 <section class="exchange-section">
   <div class="header-container">
     <h2 class="section-title">Governmental</h2>
     <div class="nav-buttons-top">
-      <button class="nav-button prev" onclick="slide('left')">
+      <button class="nav-button prev" onclick="scrollSection('governmental', 'left')">
         <i class="fas fa-chevron-left"></i>
       </button>
-      <button class="nav-button next" onclick="slide('right')">
+      <button class="nav-button next" onclick="scrollSection('governmental', 'right')">
         <i class="fas fa-chevron-right"></i>
       </button>
     </div>
   </div>
   <div class="content-wrapper">
-    <div class="exchange-container" id="exchangeContainer">
+    <div class="exchange-container" id="governmental-container">
       <div class="exchange-card">
-        <span class="exchange-name">Binance</span>
-        <img src="binance-logo.png" alt="Binance" class="exchange-img">
+        <span class="exchange-name">SEC</span>
+        <img src="assets/images/sec-logo.png" alt="SEC" class="exchange-img">
       </div>
       <div class="exchange-card">
-        <span class="exchange-name">Huobi Global</span>
-        <img src="huobi-logo.png" alt="Huobi Global" class="exchange-img">
+        <span class="exchange-name">EBA</span>
+        <img src="assets/images/EBA-logo.png" alt="EBA" class="exchange-img">
       </div>
       <div class="exchange-card">
-        <span class="exchange-name">Coinbase Pro</span>
-        <img src="coinbase-logo.png" alt="Coinbase Pro" class="exchange-img">
+        <span class="exchange-name">FCA</span>
+        <img src="assets/images/FCA-logo.png" alt="FCA" class="exchange-img">
       </div>
       <div class="exchange-card">
-        <span class="exchange-name">Kraken</span>
-        <img src="kraken-logo.png" alt="Kraken" class="exchange-img">
+        <span class="exchange-name">ACAMS</span>
+        <img src="assets/images/ACAMS-logo.jpeg" alt="ACAMS" class="exchange-img">
       </div>
       <div class="exchange-card">
-        <span class="exchange-name">Bitfinex</span>
-        <img src="bitfinex-logo.png" alt="Bitfinex" class="exchange-img">
+        <span class="exchange-name">ICA</span>
+        <img src="assets/images/ICA-logo.png" alt="ICA" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">FINMA</span>
+        <img src="assets/images/FINMA-Logo.png" alt="FINMA" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">CYPTO VALLEY</span>
+        <img src="assets/images/crypto valey.webp" alt="crypto-valley" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">FINCEN</span>
+        <img src="assets/images/FinCEN.svg" alt="fincen" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Finrac</span>
+        <img src="assets/images/fintrac.png" alt="ICA" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Egmont Group</span>
+        <img src="assets/images/egmont.jpg" alt="ICA" class="exchange-img">
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- Bank-->
-
+<!-- Banks Section -->
 <section class="exchange-section">
   <div class="header-container">
     <h2 class="section-title">Banks</h2>
     <div class="nav-buttons-top">
-      <button class="nav-button prev" onclick="slide('left')">
+      <button class="nav-button prev" onclick="scrollSection('banks', 'left')">
         <i class="fas fa-chevron-left"></i>
       </button>
-      <button class="nav-button next" onclick="slide('right')">
+      <button class="nav-button next" onclick="scrollSection('banks', 'right')">
         <i class="fas fa-chevron-right"></i>
       </button>
     </div>
   </div>
   <div class="content-wrapper">
-    <div class="exchange-container" id="exchangeContainer">
+    <div class="exchange-container" id="banks-container">
+      <div class="exchange-card">
+        <span class="exchange-name">Deutsche Bank</span>
+        <img src="assets/images/Deutsche-Logo.png" alt="Deutsche Bank" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">CommerzBank</span>
+        <img src="assets/images/commerzbank-logo.png" alt="CommerzBank" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">KFWS</span>
+        <img src="assets/images/kfw-logo.jpg" alt="KFW Bankengruppe" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Landesbank</span>
+        <img src="assets/images/LBBW_logo.png" alt="Landesbank" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">ISB</span>
+        <img src="assets/images/ISB-logo.webp" alt="ISB" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">BNP Paribas</span>
+        <img src="assets/images/bnp-paribas-logo.png" alt="BNP" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">ISB</span>
+        <img src="assets/images/ISB-logo.webp" alt="ISB" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">ISB</span>
+        <img src="assets/images/ISB-logo.webp" alt="ISB" class="exchange-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Exchanges Section -->
+<section class="exchange-section">
+  <div class="header-container">
+    <h2 class="section-title">Exchanges</h2>
+    <div class="nav-buttons-top">
+      <button class="nav-button prev" onclick="scrollSection('exchanges', 'left')">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="nav-button next" onclick="scrollSection('exchanges', 'right')">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <div class="exchange-container" id="exchanges-container">
       <div class="exchange-card">
         <span class="exchange-name">Binance</span>
         <img src="binance-logo.png" alt="Binance" class="exchange-img">
       </div>
       <div class="exchange-card">
-        <span class="exchange-name">Huobi Global</span>
-        <img src="huobi-logo.png" alt="Huobi Global" class="exchange-img">
-      </div>
-      <div class="exchange-card">
-        <span class="exchange-name">Coinbase Pro</span>
-        <img src="coinbase-logo.png" alt="Coinbase Pro" class="exchange-img">
+        <span class="exchange-name">Coinbase</span>
+        <img src="coinbase-logo.png" alt="Coinbase" class="exchange-img">
       </div>
       <div class="exchange-card">
         <span class="exchange-name">Kraken</span>
         <img src="kraken-logo.png" alt="Kraken" class="exchange-img">
       </div>
       <div class="exchange-card">
-        <span class="exchange-name">Bitfinex</span>
-        <img src="bitfinex-logo.png" alt="Bitfinex" class="exchange-img">
+        <span class="exchange-name">Huobi</span>
+        <img src="huobi-logo.png" alt="Huobi" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">KuCoin</span>
+        <img src="kucoin-logo.png" alt="KuCoin" class="exchange-img">
       </div>
     </div>
   </div>
 </section>
 
 
-
-
-
- <!-- Exchange Section -->
-  <section class="exchange-section"></section>
-    <div class="header-container">
-      <h2 class="section-title">EXCHANGES</h2>
-      <div class="nav-buttons-top">
-        <button class="nav-button prev" onclick="slide('left')">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="nav-button next" onclick="slide('right')">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-    </div>
-    <div class="content-wrapper">
-      <div class="exchange-container" id="exchangeContainer">
-        <div class="exchange-card">
-          <span class="exchange-name">Binance</span>
-          <img src="binance-logo.png" alt="Binance" class="exchange-img">
+  <div class="wallet-section">
+    <div class="wallet-content">
+      <div class="wallet-label">WALLETS</div>
+      <h2 class="heading">
+        OUR PARTNERS SECURELY STORE REFUNDED FUNDS FOR OUR CLIENTS, WHO ARE TRUSTED <span class="highlight">BY MILLIONS.</span>
+      </h2>
+      <div class="wallet-grid">
+        <!-- Exodus Card -->
+        <div class="wallet-card">
+          <div class="wallet-header">
+            <div class="wallet-name">Exodus</div>
+            <img src="/api/placeholder/100/30" alt="Exodus Logo" class="wallet-logo">
+          </div>
+          <div class="laptop-wrapper">
+            <div class="laptop-screen">
+              <div class="browser-bar">
+                <div class="browser-dots">
+                  <div class="browser-dot"></div>
+                  <div class="browser-dot"></div>
+                  <div class="browser-dot"></div>
+                </div>
+              </div>
+              <img src="/api/placeholder/400/250" alt="Exodus Wallet Screenshot" class="laptop-screenshot">
+            </div>
+            <div class="laptop-base"></div>
+          </div>
         </div>
-        <div class="exchange-card">
-          <span class="exchange-name">Huobi Global</span>
-          <img src="huobi-logo.png" alt="Huobi Global" class="exchange-img">
-        </div>
-        <div class="exchange-card">
-          <span class="exchange-name">Coinbase Pro</span>
-          <img src="coinbase-logo.png" alt="Coinbase Pro" class="exchange-img">
-        </div>
-        <div class="exchange-card">
-          <span class="exchange-name">Kraken</span>
-          <img src="kraken-logo.png" alt="Kraken" class="exchange-img">
-        </div>
-        <div class="exchange-card">
-          <span class="exchange-name">Bitfinex</span>
-          <img src="bitfinex-logo.png" alt="Bitfinex" class="exchange-img">
-        </div>
-      </div>
-    </div>
-  </section>
-
-<section class="relative bg-white py-24 px-4">
-  <!-- Background blob -->
-  <div class="absolute left-0 top-12 w-96 h-96 bg-green-50/50 blur-[100px] rounded-full"></div>
   
-  <!-- Content container -->
-  <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <!-- Left side with WALLETS text -->
-      <div class="relative z-10">
-        <h2 class="text-xl font-bold tracking-wider">WALLETS</h2>
-      </div>
-      
-      <!-- Right side with main heading -->
-      <div>
-        <h1 class="text-[40px] leading-tight font-extrabold tracking-wide">
-          OUR PARTNERS SECURELY STORE REFUNDED FUNDS FOR OUR CLIENTS, WHO ARE TRUSTED <span class="bg-gradient-to-r from-purple-500 to-indigo-500 bg-clip-text text-transparent">BY MILLIONS.</span>
-        </h1>
-      </div>
-    </div>
-
-    <!-- Wallet cards container -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-      <!-- Exodus Card -->
-      <div class="bg-white rounded-[32px] p-8 shadow-lg border border-gray-100">
-        <div class="flex items-center justify-between mb-8">
-          <span class="text-lg font-medium">Exodus</span>
-          <img src="./images/logos/exodus-logo.png" alt="Exodus logo" class="h-8 object-contain" />
+        <!-- Atomic Card -->
+        <div class="wallet-card">
+          <div class="wallet-header">
+            <div class="wallet-name">Atomic</div>
+            <img src="/api/placeholder/100/30" alt="Atomic Logo" class="wallet-logo">
+          </div>
+          <div class="laptop-wrapper">
+            <div class="laptop-screen">
+              <div class="browser-bar">
+                <div class="browser-dots">
+                  <div class="browser-dot"></div>
+                  <div class="browser-dot"></div>
+                  <div class="browser-dot"></div>
+                </div>
+              </div>
+              <img src="/api/placeholder/400/250" alt="Atomic Wallet Screenshot" class="laptop-screenshot">
+            </div>
+            <div class="laptop-base"></div>
+          </div>
         </div>
-        <div class="rounded-2xl overflow-hidden bg-gray-50">
-          <img src="./images/interfaces/exodus-interface.png" alt="Exodus interface" class="w-full object-cover" />
-        </div>
-      </div>
-
-      <!-- Atomic Card -->
-      <div class="bg-white rounded-[32px] p-8 shadow-lg border border-gray-100">
-        <div class="flex items-center justify-between mb-8">
-          <span class="text-lg font-medium">Atomic</span>
-          <img src="./images/logos/atomic-logo.png" alt="Atomic logo" class="h-8 object-contain" />
-        </div>
-        <div class="rounded-2xl overflow-hidden bg-gray-50">
-          <img src="./images/interfaces/atomic-interface.png" alt="Atomic interface" class="w-full object-cover" />
-        </div>
-      </div>
-
-      <!-- Guarda Card -->
-      <div class="bg-white rounded-[32px] p-8 shadow-lg border border-gray-100">
-        <div class="flex items-center justify-between mb-8">
-          <span class="text-lg font-medium">Guarda</span>
-          <img src="./images/logos/guarda-logo.png" alt="Guarda logo" class="h-8 object-contain" />
-        </div>
-        <div class="rounded-2xl overflow-hidden bg-gray-50">
-          <img src="./images/interfaces/guarda-interface.png" alt="Guarda interface" class="w-full object-cover" />
+  
+        <!-- Guarda Card -->
+        <div class="wallet-card">
+          <div class="wallet-header">
+            <div class="wallet-name">Guarda</div>
+            <img src="/api/placeholder/100/30" alt="Guarda Logo" class="wallet-logo">
+          </div>
+          <div class="laptop-wrapper">
+            <div class="laptop-screen">
+              <div class="browser-bar">
+                <div class="browser-dots">
+                  <div class="browser-dot"></div>
+                  <div class="browser-dot"></div>
+                  <div class="browser-dot"></div>
+                </div>
+              </div>
+              <img src="icon3-1_1.png" alt="Guarda Wallet Screenshot" class="laptop-screenshot">
+            </div>
+            <div class="laptop-base"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+  
 <!-- Portfolio Section -->
-<div class="portfolio-section">
+<div id = "Portfolio" class="portfolio-section">
   <div class="portfolio-content">
     <div class="left-column">
       <div class="portfolio-label">PORTFOLIO</div>
@@ -645,12 +803,6 @@
   </div>
 </div>
 
-
-<!-- After nav and before victim pool -->
-
-
-  <!-- Victim Pool Section -->
- <!-- Victim Pool Section -->
 <!-- Victim Pool Section -->
 <main class="main-content" style="margin: 0 auto; max-width: 1200px; padding: 2rem;">
   <div class="victim-pool-grid">
@@ -681,87 +833,164 @@
 
 
   <!-- Consultation Section -->
-  <div class="consultation-card">
-    <div class="card-grid">
-      <div class="content-section">
-        <div class="subtitle">CONSULTATION</div>
-        <h2 class="consultation-title">
-          GET A FREE<br>
-          CONSULTATION &<br>
-          JOIN OUR<br>
-          COMMUNITY OF<br>
-          PROTECTED CLIENTS
-        </h2>
-        <p class="description">
-          Do not hesitate to contact us for a free consultation if you have become a victim of scammers. Our specialists will contact you and help you solve the problem.
-        </p>
-      </div>
-      <div class="form-section">
-        <div class="input-group">
-          <input type="text" class="form-input" placeholder="First Name">
-        </div>
-        <div class="input-group">
-          <input type="text" class="form-input" placeholder="Last Name">
-        </div>
-        <div class="input-group">
-          <input type="email" class="form-input" placeholder="Valid E-mail">
-        </div>
-        <div class="input-group">
-          <div class="phone-input">
-            <div class="country-select">
-              <img src="/api/placeholder/24/16" alt="flag" class="flag">
-              <span>+254</span>
-            </div>
-            <input type="tel" class="form-input" placeholder="999-999999" style="flex: 1">
-          </div>
-        </div>
-        <button class="submit-btn">Next</button>
-      </div>
+  <!-- Consultation Form Section -->
+<div class="consultation-card">
+  <div class="card-grid">
+    <div class="content-section">
+      <div class="subtitle">CONSULTATION</div>
+      <h2 class="consultation-title">
+        GET A FREE<br>
+        CONSULTATION &<br>
+        JOIN OUR<br>
+        COMMUNITY OF<br>
+        PROTECTED CLIENTS
+      </h2>
+      <p class="description">
+        Do not hesitate to contact us for a free consultation if you have become a victim of scammers. Our specialists will contact you and help you solve the problem.
+      </p>
     </div>
+    
+    <!-- Initial Contact Form -->
+    <form class="form-section" id="initial-form" onsubmit="event.preventDefault(); validateAndProceed();">
+      <div class="input-group">
+        <input type="text" class="form-input" id="firstName" placeholder="First Name" required>
+        <span class="error-message" id="firstNameError"></span>
+      </div>
+      <div class="input-group">
+        <input type="text" class="form-input" id="lastName" placeholder="Last Name" required>
+        <span class="error-message" id="lastNameError"></span>
+      </div>
+      <div class="input-group">
+        <input type="email" class="form-input" id="email" placeholder="Valid E-mail" required>
+        <span class="error-message" id="emailError"></span>
+      </div>
+      <div class="input-group">
+        <div class="phone-input">
+          <select class="country-select" id="countrySelect" required>
+            <option value="">Select Country</option>
+            <option value="+1">United States (+1)</option>
+            <option value="+44">United Kingdom (+44)</option>
+            <option value="+254">Kenya (+254)</option>
+          </select>
+          <input type="tel" class="form-input" id="phone" placeholder="Enter phone number" required>
+        </div>
+        <span class="error-message" id="phoneError"></span>
+      </div>
+      <button type="submit" class="submit-btn">Next</button>
+    </form>
+
+    <!-- Market Selection Form -->
+    <form class="form-section hidden" id="market-selection" onsubmit="event.preventDefault(); validateMarkets();">
+      <h3 class="text-xl font-bold mb-4">Select Your Market <span class="required">*</span></h3>
+      <div class="market-options grid grid-cols-2 gap-4">
+        <label class="market-option">
+          <input type="checkbox" name="market" value="crypto" class="market-checkbox">
+          <span class="option-text">Crypto</span>
+        </label>
+        <label class="market-option">
+          <input type="checkbox" name="market" value="forex" class="market-checkbox">
+          <span class="option-text">Forex</span>
+        </label>
+        <label class="market-option">
+          <input type="checkbox" name="market" value="nft" class="market-checkbox">
+          <span class="option-text">NFT</span>
+        </label>
+        <label class="market-option">
+          <input type="checkbox" name="market" value="defi" class="market-checkbox">
+          <span class="option-text">DeFi</span>
+        </label>
+        <label class="market-option">
+          <input type="checkbox" name="market" value="trading" class="market-checkbox">
+          <span class="option-text">Trading</span>
+        </label>
+        <label class="market-option">
+          <input type="checkbox" name="market" value="banking" class="market-checkbox">
+          <span class="option-text">Banking</span>
+        </label>
+      </div>
+      <span class="error-message" id="marketError"></span>
+      <button type="submit" class="submit-btn mt-6">Next</button>
+    </form>
+
+    <!-- Duration Selection Form -->
+    <form class="form-section hidden" id="duration-selection" onsubmit="event.preventDefault(); submitFinalForm();">
+      <h3 class="text-xl font-bold mb-4">Select Duration of Investment <span class="required">*</span></h3>
+      <div class="duration-options grid grid-cols-2 gap-4">
+        <label class="duration-option">
+          <input type="radio" name="duration" value="1-2" required>
+          <span class="option-text">1-2 Months</span>
+        </label>
+        <label class="duration-option">
+          <input type="radio" name="duration" value="2-5" required>
+          <span class="option-text">2-5 Months</span>
+        </label>
+        <label class="duration-option">
+          <input type="radio" name="duration" value="5-12" required>
+          <span class="option-text">5-12 Months</span>
+        </label>
+        <label class="duration-option">
+          <input type="radio" name="duration" value="12+" required>
+          <span class="option-text">12+ Months</span>
+        </label>
+      </div>
+      <span class="error-message" id="durationError"></span>
+      <button type="submit" class="submit-btn mt-6">Submit</button>
+    </form>
+  </div>
+</div>
+
+
+<div id="FAQ" class="container">
+  <div class="faq-header">
+      <h2 class="faq-title">FAQ</h2>
+      <div class="left-section">ANY OTHER QUESTIONS?</div>
+      <div class="left-section">ASK US IT</div>
   </div>
 
-  <!-- FAQ Section -->
-  <div class="container">
-    <div class="faq-header">
-      <h2 class="faq-title">FAQ</h2>
-      <div class="faq-subtitle">ANY OTHER QUESTIONS?</div>
-      <div class="ask-us">ASK US IT</div>
-    </div>
-    <div class="faq-accordion">
+  <div class="faq-accordion">
       <div class="faq-item">
-        <div class="faq-question">
-          WHAT DOES YOUR COMPANY DO?
-          <div class="faq-close">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
+          <div class="faq-question" onclick="toggleFAQ(1)">
+              WHAT DOES YOUR COMPANY DO?
+              <div class="faq-toggle" id="toggle1">+</div>
           </div>
-        </div>
-        <div class="faq-answer">
-          We investigate fraudulent activities and provide services to search, capture, and return money from scammers to our clients.
-        </div>
+          <div class="faq-answer" id="answer1">
+              We investigate fraudulent activities and provide services to search, capture, and return money from scammers to our clients.
+          </div>
       </div>
+
       <div class="faq-item">
-        <div class="faq-question">
-          HOW CAN I FIND OUT IF I QUALIFY AS A VICTIM OF FRAUD?
-          <div class="faq-toggle">+</div>
-        </div>
-        <div class="faq-answer">
-          Contact our team for a free consultation. We'll assess your case and determine if you qualify for our recovery services.
-        </div>
+          <div class="faq-question" onclick="toggleFAQ(2)">
+              HOW CAN I FIND OUT IF I QUALIFY AS A VICTIM OF FRAUD?
+              <div class="faq-toggle" id="toggle2">+</div>
+          </div>
+          <div class="faq-answer" id="answer2">
+            Our team of professionals conducts a comprehensive investigation of each specific case, using advanced technologies and methods. We work directly with law enforcement agencies and banks to facilitate the process of recovering stolen funds.
+          </div>
       </div>
+
       <div class="faq-item">
-        <div class="faq-question">
-          HOW DO YOU WORK?
-          <div class="faq-toggle">+</div>
-        </div>
-        <div class="faq-answer">
-          We use advanced tracking technologies and legal expertise to investigate fraud cases and recover stolen funds through established channels.
-        </div>
+          <div class="faq-question" onclick="toggleFAQ(3)">
+              HOW DO YOU WORK?
+              <div class="faq-toggle" id="toggle3">+</div>
+          </div>
+          <div class="faq-answer" id="answer3">
+              We use advanced tracking technologies and legal expertise to investigate fraud cases and recover stolen funds through established channels.
+          </div>
       </div>
-    </div>
   </div>
+</div>
+
+<script>
+  function toggleFAQ(id) {
+      const answer = document.getElementById(`answer${id}`);
+      const toggle = document.getElementById(`toggle${id}`);
+      
+      answer.classList.toggle('active');
+      toggle.textContent = answer.classList.contains('active') ? '-' : '+';
+      toggle.classList.toggle('active');
+  }
+</script>
+
 
   <!-- Footer -->
   <footer class="footer-container">
@@ -795,13 +1024,13 @@
           <p>140 EAST 46TH STREET</p>
           <p>NEW YORK, NY 10017</p>
           <p>USA</p>
-          <a href="#" class="newsletter-link">Subscribe Newsletter</a>
+          <a href="subscribe.html" class="newsletter-link">Subscribe Newsletter</a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <div>© 2023 Fin-rec. All rights reserved.</div>
-      <div><a href="#" style="color: inherit; text-decoration: none;">Privacy policy</a></div>
+      <div><a href="subscribe.html" style="color: inherit; text-decoration: none;">Privacy policy</a></div>
     </div>
   </footer>
 
