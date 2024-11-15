@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlapping Elements Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+    
+
+    <!-- Negative Margin Section -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4">Negative Margin Overlap</h2>
+        <div class="flex">
+            <div class="bg-purple-500 w-64 h-64 rounded-lg"></div>
+            <div class="bg-green-500 w-64 h-64 rounded-lg -ml-32 transform hover:translate-x-4 transition-transform"></div>
+        </div>
+    </section>
+
+    <!-- Z-index Stack Section -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-bold mb-4">Z-index Stack</h2>
+        <div class="relative h-96">
+            <!-- Step 1 -->
+            <div class="draggable-card absolute bg-gray-900 text-white rounded-xl p-6 relative overflow-hidden z-10 transform transition duration-300 cursor-move w-64">
+                <h3 class="text-2xl font-semibold">CHECKING YOUR CASE</h3>
+                <p class="text-sm mt-2 opacity-80">
+                    Carrying out preliminary checks in order to be able to assess, based on our experience, whether the present case has a plausible prospect of success.
+                </p>
+                <div class="absolute top-4 right-4 bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">
+                    1
+                </div>
+            </div>
+    
+            <!-- Step 2 -->
+            <div class="draggable-card absolute top-10 left-10 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl p-6 relative overflow-hidden z-20 transform transition duration-300 cursor-move w-64">
+                <h3 class="text-2xl font-semibold">EVIDENCE COLLECTION</h3>
+                <p class="text-sm mt-2 opacity-80">
+                    We gather all necessary information and documents to investigate your case and systematically approach those who were involved in the illegal transfer of your assets.
+                </p>
+                <div class="absolute top-4 right-4 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">
+                    2
+                </div>
+            </div>
+    
+            <!-- Step 3 -->
+            <div class="draggable-card absolute top-20 left-20 bg-green-500 text-white rounded-xl p-6 relative overflow-hidden z-30 transform transition duration-300 cursor-move w-64">
+                <h3 class="text-2xl font-semibold">CASE ANALYSIS</h3>
+                <p class="text-sm mt-2 opacity-80">
+                    Detailed examination of collected evidence and establishing the legal framework for recovery.
+                </p>
+                <div class="absolute top-4 right-4 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">
+                    3
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+ 
+    </section>
+    <script>
+        let elementCount = 0;
+
+function addOverlappingElement() {
+    const container = document.getElementById('dynamic-container');
+    const newElement = document.createElement('div');
+    
+    // Generate random position and color
+    const top = Math.random() * 300;
+    const left = Math.random() * 300;
+    const hue = Math.random() * 360;
+    
+    elementCount++;
+    
+    newElement.classList.add('absolute', 'w-32', 'h-32', 'rounded-lg', 'shadow-lg', 'transition-all', 'duration-300', 'cursor-move');
+    newElement.style.backgroundColor = `hsl(${hue}, 70%, 60%)`;
+    newElement.style.top = `${top}px`;
+    newElement.style.left = `${left}px`;
+    newElement.style.zIndex = elementCount;
+    
+    // Add hover effect
+    newElement.addEventListener('mouseover', () => {
+        newElement.style.transform = 'scale(1.1)';
+    });
+    
+    newElement.addEventListener('mouseout', () => {
+        newElement.style.transform = 'scale(1)';
+    });
+    
+    // Make element draggable
+    makeDraggable(newElement);
+    
+    container.appendChild(newElement);
+}
+
+function makeStackedElementsDraggable() {
+  const stackedElements = document.querySelectorAll('.z-stack-element');
+  
+  stackedElements.forEach(element => {
+    let startY;
+    let originalY;
+    
+    element.addEventListener('mousedown', startDrag);
+    document.addEventListener('mouseup', stopDrag);
+    
+    function startDrag(e) {
+      startY = e.clientY;
+      originalY = parseInt(element.style.top) || 0;
+      
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('mouseup', stopDrag);
+    }
+    
+    function drag(e) {
+      const deltaY = e.clientY - startY;
+      const newY = originalY + deltaY;
+      
+      // Only allow downward movement
+      if (newY >= originalY) {
+        element.style.top = `${newY}px`;
+      }
+    }
+    
+    function stopDrag() {
+      document.removeEventListener('mousemove', drag);
+      document.removeEventListener('mouseup', stopDrag);
+    }
+  });
+}
+
+// Update your HTML elements to include the z-stack-element class
+document.addEventListener('DOMContentLoaded', () => {
+  const stackContainer = document.querySelector('.relative');
+  
+  // Add the class to your z-index elements
+  const elements = `
+    <div class="absolute z-10 bg-blue-500 w-64 h-64 rounded-lg z-stack-element cursor-move"></div>
+    <div class="absolute z-20 top-10 left-10 bg-red-500 w-64 h-64 rounded-lg z-stack-element cursor-move"></div>
+    <div class="absolute z-30 top-20 left-20 bg-green-500 w-64 h-64 rounded-lg z-stack-element cursor-move"></div>
+  `;
+  
+  stackContainer.innerHTML = elements;
+  makeStackedElementsDraggable();
+});
+
+
+        </script>
+</body>
+</html>

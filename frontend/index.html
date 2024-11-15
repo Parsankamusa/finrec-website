@@ -6,8 +6,9 @@
  
   <link rel="stylesheet" href="styles.css"> 
   <script src="javascript/script.js"></script>
-  <!-- <script src="javascript/formvalidation.js"></script> -->
+  <script src="javascript/formvalidation.js"></script>
   <script src="javascript/popup.js"></script>
+  <script src="javascript/overlapping.js"></script>
   <script src="https://unpkg.com/@heroicons/vue@2.0.13/outline"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -17,13 +18,13 @@
 <body class="bg-gray-100">
   <header class="flex items-center justify-between p-6 bg-white shadow-lg">
     <div class="flex items-center space-x-2">
-      <div class="logo-title">IMMEDIATE <br> REFUND</div>
+      <div class="logo-title text-purple-600">IMMEDIATE <br> REFUND</div>
     </div>
     <nav class="flex space-x-6">
       <a href="#About-Us" class="text-gray-800 hover:text-purple-600">About us</a>
       <a href="#Solutions" class="text-gray-800 hover:text-purple-600">Solutions</a>
       <a href="#Partners" class="text-gray-800 hover:text-purple-600">Partners</a>
-      <a href="#Portfolio" class="text-gray-800 hover:text-purple-600">Projects</a>
+      <a href="#portfolio" class="text-gray-800 hover:text-purple-600">Projects</a>
       <a href="#FAQ" class="text-gray-800 hover:text-purple-600">FAQ</a>
     </nav>
     <a href="login.html" class="px-4 py-2 text-purple-600 border border-purple-600 rounded-full hover:bg-purple-100 transition">Log in</a>
@@ -100,15 +101,15 @@
       </p>
     </div>
     
-    <div class="form-section" id="initial-form">
+    <div class="form-section" id="initial-form"  onsubmit="event.preventDefault(); validateAndProceed();">
       <div class="input-group">
-        <input type="text" class="form-input" placeholder="First Name" required>
+        <input type="text" class="form-input" placeholder="First Name" required >
       </div>
       <div class="input-group">
         <input type="text" class="form-input" placeholder="Last Name" required>
       </div>
       <div class="input-group">
-        <input type="email" class="form-input" placeholder="Valid E-mail" required>
+        <input type="email" class="form-input" placeholder="Valid E-mail" required >
       </div>
       <div class="input-group">
         <div class="phone-input">
@@ -117,14 +118,14 @@
             <option value="+44" data-flag="gb.png">United Kingdom (+44)</option>
             <option value="+254" data-flag="ke.png">Kenya (+254)</option>
           </select>
-          <input type="tel" class="form-input" placeholder="Enter phone number" style="flex: 1" required>
+          <input type="tel" class="form-input" placeholder="Enter phone number" style="flex: 1">
         </div>
       </div>
       <button class="submit-btn" onclick="showMarketSelection()">Next</button>
     </div>
     
     <!-- Market Selection Form -->
-    <div class="form-section hidden" id="market-selection">
+    <div class="form-section hidden" id="market-selection"  onsubmit="event.preventDefault(); validateAndProceed();">
       <h3 class="text-xl font-bold mb-4">Select Your Market</h3>
       <div class="market-options grid grid-cols-2 gap-4">
         <label class="market-option">
@@ -214,32 +215,66 @@
 </div>
 
 <!-- Overlapping Scroll Section -->
-<section id="1" class="bg-blue-50 py-12">
+<section id="steps-section" class="bg-blue-50 py-12">
   <div class="max-w-lg mx-auto px-4 relative">
     <h2 class="text-left text-xl font-bold text-gray-700 mb-6">HOW IT WORKS</h2>
-    
+
+  
+    <div class="max-w-lg mx-auto px-4 relative pt-16">
     <!-- Step 1 -->
-    <div class="bg-gray-900 text-white rounded-xl p-6 relative overflow-hidden mb-8 z-10 transform transition duration-300">
-      <h3 class="text-2xl font-semibold">CHECKING YOUR CASE</h3>
-      <p class="text-sm mt-2 opacity-80">
+    <div class="card-animate bg-gray-900 text-white rounded-xl p-4 relative overflow-hidden mb-4 z-10 transform transition-all duration-500 ease-out">
+      <h3 class="text-xl font-semibold">CHECKING YOUR CASE</h3>
+      <p class="text-sm mt-1 opacity-80">
         Carrying out preliminary checks in order to be able to assess, based on our experience, whether the present case has a plausible prospect of success.
       </p>
-      <div class="absolute top-4 right-4 bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">
+      <div class="absolute top-3 right-3 bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm">
         1
       </div>
     </div>
-    
+
     <!-- Step 2 -->
-    <div class="bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl p-6 relative overflow-hidden z-20 -mt-16 transform transition duration-300 hover:-translate-y-4">
-      <h3 class="text-2xl font-semibold">EVIDENCE COLLECTION</h3>
-      <p class="text-sm mt-2 opacity-80">
-        We gather all necessary information and documents to investigate your case and systematically approach those who were involved in the illegal transfer of your assets.
+    <div class="card-animate bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl p-4 relative overflow-hidden mb-4 z-20 transform transition-all duration-500 ease-out">
+      <h3 class="text-xl font-semibold">EVIDENCE COLLECTION</h3>
+      <p class="text-sm mt-1 opacity-80">
+        We gather all necessary information and documents to investigate your case and systematically approach those who were involved.
       </p>
-      <div class="absolute top-4 right-4 bg-gray-900 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">
+      <div class="absolute top-3 right-3 bg-gray-900 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm">
         2
       </div>
     </div>
-    
+
+    <!-- Step 3 -->
+    <div class="card-animate bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-xl p-4 relative overflow-hidden mb-4 z-30 transform transition-all duration-500 ease-out">
+      <h3 class="text-xl font-semibold">LEGAL STRATEGY</h3>
+      <p class="text-sm mt-1 opacity-80">
+        Developing a comprehensive legal strategy tailored to your specific case, identifying the most effective approach.
+      </p>
+      <div class="absolute top-3 right-3 bg-gray-900 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm">
+        3
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="card-animate bg-gradient-to-r from-indigo-500 to-pink-500 text-white rounded-xl p-4 relative overflow-hidden mb-4 z-40 transform transition-all duration-500 ease-out">
+      <h3 class="text-xl font-semibold">EXECUTION</h3>
+      <p class="text-sm mt-1 opacity-80">
+        Implementing the strategy through legal proceedings, negotiations, and coordinated actions across jurisdictions.
+      </p>
+      <div class="absolute top-3 right-3 bg-gray-900 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm">
+        4
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="card-animate bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-xl p-4 relative overflow-hidden z-50 transform transition-all duration-500 ease-out">
+      <h3 class="text-xl font-semibold">RECOVERY</h3>
+      <p class="text-sm mt-1 opacity-80">
+        Successfully recovering your assets and ensuring proper transfer back to your control with complete documentation.
+      </p>
+      <div class="absolute top-3 right-3 bg-gray-900 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm">
+        5
+      </div>
+    </div>
   </div>
 </section>
 
@@ -276,27 +311,28 @@
             <!-- Right Column -->
             <div class="space-y-8">
                 <h1 class="text-4xl lg:text-5xl font-bold leading-tight">
-                    <span class="text-purple-600">FIN-REC IS A LEADING ORGANIZATION</span> 
+                    <span class="text-purple-600">IMMEDIATE-REFUND IS A LEADING ORGANIZATION</span> 
                     <span class="text-black">THAT SPECIALIZES IN HELPING VICTIMS OF FRAUD RECOVER THEIR LOST FUNDS</span>
                 </h1>
                 
-                <div class="grid grid-cols-1 gap-8">
-                    <p class="text-gray-600">
-                        We understand the difficulties and challenges that victims of fraud face, and that is why we have dedicated our services to help them overcome them
-                    </p>
-                    
-                    <p class="text-gray-600">
-                        Fin-rec is a leading provider of data, software, services and research to organizations in over 70 countries, including government agencies, exchanges, financial institutions and cybersecurity companies
-                    </p>
-                    
-                    <p class="text-gray-600">
-                        Our powerful data platform supports investigations, compliance and risk management, while being instrumental in solving high-profile cyber criminal cases
-                    </p>
-                    
-                    <p class="text-gray-600">
-                        We pride ourselves on being equal parts curious, honest, and passionate. Every day, we're focused on solving complex problems that make our world safer and lay a foundation for the cryptocurrency economy to flourish
-                    </p>
-                </div>
+                <div class="grid grid-cols-2 gap-8">
+                  <p class="text-gray-600">
+                      We understand the difficulties and challenges that victims of fraud face, and that is why we have dedicated our services to help them overcome them.
+                  </p>
+                  
+                  <p class="text-gray-600">
+                      IMMEDIATE-REFUND is a leading provider of data, software, services and research to organizations in over 70 countries, including government agencies, exchanges, financial institutions and cybersecurity companies.
+                  </p>
+                  
+                  <p class="text-gray-600">
+                      Our powerful data platform supports investigations, compliance and risk management, while being instrumental in solving high-profile cyber criminal cases.
+                  </p>
+                  
+                  <p class="text-gray-600">
+                      We pride ourselves on being equal parts curious, honest, and passionate. Every day, we're focused on solving complex problems that make our world safer and lay a foundation for the cryptocurrency economy to flourish.
+                  </p>
+              </div>
+              
             </div>
         </div>
     </section>
@@ -612,12 +648,132 @@
         <img src="assets/images/bnp-paribas-logo.png" alt="BNP" class="exchange-img">
       </div>
       <div class="exchange-card">
-        <span class="exchange-name">ISB</span>
-        <img src="assets/images/ISB-logo.webp" alt="ISB" class="exchange-img">
+        <span class="exchange-name">Credit Mutuel</span>
+        <img src="assets/images/Credit-Mutuel-logo.png" alt="Credit Mutuel" class="exchange-img">
       </div>
       <div class="exchange-card">
-        <span class="exchange-name">ISB</span>
-        <img src="assets/images/ISB-logo.webp" alt="ISB" class="exchange-img">
+        <span class="exchange-name">Societe generale</span>
+        <img src="assets/images/societe-generale-logo.png" alt="Societe generale" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Credit Agricole</span>
+        <img src="assets/images/credit-agricole-logo.png" alt="Credit Agricole" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">caisse d'Eparngne (groupe bpce)</span>
+        <img src="assets/images/groupe bpce-logo.jpeg" alt="caisse d'Eparngne (groupe bpce)" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Royal Bank Of Canada</span>
+        <img src="assets/images/Royal_Bank_of_Canada-Logo.png" alt="Royal Bank Of Canada" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Toronto Dominion Bank(TD)</span>
+        <img src="assets/images/TD-Bank-Logo.png" alt="Toronto Dominion Bank(TD)" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Bank of nova scotia (scotiabank)</span>
+        <img src="assets/images/Scotiabank-Logo.png" alt="Bank of nova scotia (scotiabank)" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Bank of Montreal(BMO)</span>
+        <img src="assets/images/bank of montreal-logo.png" alt="Bank of Montreal(BMO)" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">CIBC(Canadian Imperial Bank of Commerce)</span>
+        <img src="assets/images/cibc-logo.png" alt="CIBC(Canadian Imperial Bank of Commerce)" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Commonwealth Bank of Australia</span>
+        <img src="assets/images/commonwealth-logo.png" alt="Commonwealth Bank of Australia" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Westpac Banking Corporation</span>
+        <img src="assets/images/westpac banking-logo.png" alt="Westpac Banking Corporation" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Austrialia and New Zealand Banking Group Limited(ANZ)</span>
+        <img src="assets/images/anz-logo.png" alt="Austrialia and New Zealand Banking Group Limited(ANZ)" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">National Australia Bank(nab)</span>
+        <img src="assets/images/nab-logo.png" alt="National Australia Bank(nab)" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Macquarie Group Limited</span>
+        <img src="assets/images/Macquarie-logo.png" alt="Macquarie Group Limited" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">HSBC</span>
+        <img src="assets/images/HSBC_UK -logo.png" alt=">HSBC" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Barclays</span>
+        <img src="assets/images/Barclays-logo.png" alt="Barclays" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Royal Bank of Scotland</span>
+        <img src="assets/images/royal-bank of scotland-logo.png" alt="Royal Bank of Scotland" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Lloyds Bank</span>
+        <img src="assets/images/Lloyds-Bank-Logo.png" alt="Lloyds Bank" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">standard chartered</span>
+        <img src="assets/images/standard-chartered-logo.png" alt="standard chartered" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">ING</span>
+        <img src="assets/images/ing-bank-logo.png" alt="ING" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Robabank</span>
+        <img src="assets/images/Robabank.jpeg" alt="Robaban" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">ABN-AMRO Bank</span>
+        <img src="assets/images/abn-amro-logo.png" alt="ABN-AMRO Bank" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">de volksbank</span>
+        <img src="assets/images/De_Volksbank_logo.png" alt="de volksbank" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Triodos Bank</span>
+        <img src="assets/images/triodos-bank-logo.png" alt="Triodos Bank" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Erste Bank</span>
+        <img src="assets/images/Erste Bank-logo.png" alt="Erste Bank" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Raiffeisen bank international</span>
+        <img src="assets/images/Raiffeisen-Bank-International-Logo.jpg" alt="Raiffeisen bank international" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">uniCredit Bank Austria</span>
+        <img src="assets/images/Unitcredit bank of austria-logo.png" alt="uniCredit Bank Austria" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Bawag Group</span>
+        <img src="assets/images/BAWAG_P.S.K._logo.png" alt="Bawag Group" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Oberbank</span>
+        <img src="assets/images/Oberbank-logo.png" alt="Oberbank" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Revolut</span>
+        <img src="assets/images/Revolut-logo.png" alt="Revolut" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Wize</span>
+        <img src="assets/images/Wize-logo.png" alt="wize" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Monzo</span>
+        <img src="assets/images/monzo-logo.png" alt="Monzo" class="exchange-img">
       </div>
     </div>
   </div>
@@ -644,24 +800,55 @@
       </div>
       <div class="exchange-card">
         <span class="exchange-name">Coinbase</span>
-        <img src="coinbase-logo.png" alt="Coinbase" class="exchange-img">
+        <img src="assets/images/Coinbase-Logo.png" alt="Coinbase" class="exchange-img">
       </div>
       <div class="exchange-card">
         <span class="exchange-name">Kraken</span>
-        <img src="kraken-logo.png" alt="Kraken" class="exchange-img">
+        <img src="assets/images/kraken-logo.png" alt="Kraken" class="exchange-img">
       </div>
       <div class="exchange-card">
         <span class="exchange-name">Huobi</span>
-        <img src="huobi-logo.png" alt="Huobi" class="exchange-img">
+        <img src="assets/images/huobi-logo.png" alt="Huobi" class="exchange-img">
       </div>
       <div class="exchange-card">
-        <span class="exchange-name">KuCoin</span>
-        <img src="kucoin-logo.png" alt="KuCoin" class="exchange-img">
+        <span class="exchange-name">Bitfinex</span>
+        <img src="assets/images/bitfinex-logo.png" alt="Bitfinex" class="exchange-img">
       </div>
-    </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Upbit</span>
+        <img src="assets/images/Upbit-logo.png" alt="Upbit" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Bithumb</span>
+        <img src="assets/images/bithumb-logo.png" alt="Bithumb" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Okex</span>
+        <img src="assets/images/Okex-logo.png" alt="Okex" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Bitstamp</span>
+        <img src="assets/images/Bitstamp-logo.png" alt="Bitstamp" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Coinsquare</span>
+        <img src="assets/images/Coinsquare-logo.jpg" alt="Coinsquare" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Bitbuy</span>
+        <img src="assets/images/Bitbuy-logo.jpeg" alt="Bitbuy" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Ndax</span>
+        <img src="assets/images/Ndax-logo.png" alt="Ndax" class="exchange-img">
+      </div>
+      <div class="exchange-card">
+        <span class="exchange-name">Moonpay</span>
+        <img src="assets/images/Moon pay-logo.png" alt="Moonpay" class="exchange-img">
+      </div>
+     </div>
   </div>
 </section>
-
 
   <div class="wallet-section">
     <div class="wallet-content">
@@ -674,7 +861,7 @@
         <div class="wallet-card">
           <div class="wallet-header">
             <div class="wallet-name">Exodus</div>
-            <img src="/api/placeholder/100/30" alt="Exodus Logo" class="wallet-logo">
+            <img src="assets/images/exodus-logo.png" alt="Exodus Logo" class="wallet-logo">
           </div>
           <div class="laptop-wrapper">
             <div class="laptop-screen">
@@ -685,7 +872,7 @@
                   <div class="browser-dot"></div>
                 </div>
               </div>
-              <img src="/api/placeholder/400/250" alt="Exodus Wallet Screenshot" class="laptop-screenshot">
+              <img src="assets/images/exodus-interface.jpeg" alt="Exodus Wallet Screenshot" class="laptop-screenshot">
             </div>
             <div class="laptop-base"></div>
           </div>
@@ -695,7 +882,7 @@
         <div class="wallet-card">
           <div class="wallet-header">
             <div class="wallet-name">Atomic</div>
-            <img src="/api/placeholder/100/30" alt="Atomic Logo" class="wallet-logo">
+            <img src="assets/images/atomi-logo.png" alt="Atomic Logo" class="wallet-logo">
           </div>
           <div class="laptop-wrapper">
             <div class="laptop-screen">
@@ -706,7 +893,7 @@
                   <div class="browser-dot"></div>
                 </div>
               </div>
-              <img src="/api/placeholder/400/250" alt="Atomic Wallet Screenshot" class="laptop-screenshot">
+              <img src="assets/images/atomic-interface.png" alt="Atomic Wallet Screenshot" class="laptop-screenshot">
             </div>
             <div class="laptop-base"></div>
           </div>
@@ -716,7 +903,7 @@
         <div class="wallet-card">
           <div class="wallet-header">
             <div class="wallet-name">Guarda</div>
-            <img src="/api/placeholder/100/30" alt="Guarda Logo" class="wallet-logo">
+            <img src="assets/images/guard-logo.jpg" alt="Guarda Logo" class="wallet-logo">
           </div>
           <div class="laptop-wrapper">
             <div class="laptop-screen">
@@ -727,7 +914,7 @@
                   <div class="browser-dot"></div>
                 </div>
               </div>
-              <img src="icon3-1_1.png" alt="Guarda Wallet Screenshot" class="laptop-screenshot">
+              <img src="assets/images/guard-interface-png.jpeg" alt="Guarda Wallet Screenshot" class="laptop-screenshot">
             </div>
             <div class="laptop-base"></div>
           </div>
@@ -737,7 +924,7 @@
   </div>
   
 <!-- Portfolio Section -->
-<div id = "Portfolio" class="portfolio-section">
+<div id ="portfolio" class="portfolio-section">
   <div class="portfolio-content">
     <div class="left-column">
       <div class="portfolio-label">PORTFOLIO</div>
@@ -752,52 +939,52 @@
   <div class="company-grid">
     <!-- Row 1 -->
     <div class="company-card">
-      <img src="/api/placeholder/80/60" alt="OneCoin" class="company-logo">
+      <img src="assets/images/onecoin-logo.jpeg" alt="OneCoin" class="company-logo">
       <p class="company-name">OneCoin</p>
     </div>
     <div class="company-card">
-      <img src="/api/placeholder/80/60" alt="Bitconnect" class="company-logo">
+      <img src="assets/images/Bitconnect-logo.webp" alt="Bitconnect" class="company-logo">
       <p class="company-name">Bitconnect</p>
     </div>
     <div class="company-card">
-      <img src="/api/placeholder/80/60" alt="USI Tech" class="company-logo">
+      <img src="assets/images/USI TECH-logo.jpeg" alt="USI Tech" class="company-logo">
       <p class="company-name">USI Tech</p>
     </div>
     <div class="company-card">
-      <img src="/api/placeholder/80/60" alt="Liberty Reserve" class="company-logo">
+      <img src="assets/images/Liberty Reserve-logo.png" alt="Liberty Reserve" class="company-logo">
       <p class="company-name">Liberty Reserve</p>
     </div>
     <div class="company-card">
-      <img src="/api/placeholder/80/60" alt="MMM Global" class="company-logo">
+      <img src="assets/images/MMM_logo.png" alt="MMM Global" class="company-logo">
       <p class="company-name">MMM Global</p>
     </div>
     <div class="company-card">
-      <img src="/api/placeholder/80/60" alt="Telexfree" class="company-logo">
+      <img src="assets/images/Telex_Free-logo.jpg" alt="Telexfree" class="company-logo">
       <p class="company-name">Telexfree</p>
     </div>
     <!-- Row 2 -->
     <div class="company-card">
-      <img src="/api/placeholder/80/60" alt="DavorCoin" class="company-logo">
+      <img src="assets/images/davorcoin-logo.png" alt="DavorCoin" class="company-logo">
       <p class="company-name">DavorCoin</p>
     </div>
     <div class="company-card">
-      <img src="/api/placeholder/80/60" alt="B3Coin" class="company-logo">
+      <img src="assets/images/B3coin-logo.jpg" alt="B3Coin" class="company-logo">
       <p class="company-name">B3Coin</p>
     </div>
     <div class="company-card">
-      <img src="/api/placeholder/80/60" alt="Paycoin" class="company-logo">
+      <img src="assets/images/paycoin-logo.jpg" alt="Paycoin" class="company-logo">
       <p class="company-name">Paycoin</p>
     </div>
     <div class="company-card">
-      <img src="/api/placeholder/80/60" alt="DasCoin" class="company-logo">
+      <img src="assets/images/Dascoin-Logo.png" alt="DasCoin" class="company-logo">
       <p class="company-name">DasCoin</p>
     </div>
     <div class="company-card">
-      <img src="/api/placeholder/80/60" alt="Contigus" class="company-logo">
+      <img src="assets/images/conligus-logo.jpeg" alt="Contigus" class="company-logo">
       <p class="company-name">Contigus</p>
     </div>
     <div class="company-card">
-      <img src="/api/placeholder/80/60" alt="PlexCoin" class="company-logo">
+      <img src="assets/images/plexcoin-logo.jpeg" alt="PlexCoin" class="company-logo">
       <p class="company-name">PlexCoin</p>
     </div>
   </div>
@@ -831,8 +1018,6 @@
   </div>
 </main>
 
-
-  <!-- Consultation Section -->
   <!-- Consultation Form Section -->
 <div class="consultation-card">
   <div class="card-grid">
@@ -876,7 +1061,7 @@
         </div>
         <span class="error-message" id="phoneError"></span>
       </div>
-      <button type="submit" class="submit-btn">Next</button>
+      <button type="submit" class="submit-btn" onclick="showMarketSelection()">Next</button>
     </form>
 
     <!-- Market Selection Form -->
@@ -909,7 +1094,7 @@
         </label>
       </div>
       <span class="error-message" id="marketError"></span>
-      <button type="submit" class="submit-btn mt-6">Next</button>
+      <button type="submit"  onclick="showDurationSelection()">Next</button>
     </form>
 
     <!-- Duration Selection Form -->
@@ -998,7 +1183,9 @@
       <div class="footer-section">
         <div class="footer-logo">
           <div class="footer-logo-icon"></div>
-          Fin-rec
+          <div class="flex items-center space-x-2">
+            <div class="logo-title text-purple-600">IMMEDIATE <br> REFUND</div>
+          </div>
         </div>
       </div>
       <div class="footer-section">

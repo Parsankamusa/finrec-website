@@ -209,20 +209,27 @@ const countries = [
 function initializeCountrySelector() {
   const select = document.getElementById('countrySelect');
   
+  // Add dark styling to the select element
+  select.style.backgroundColor = '#1a1a1a';
+  select.style.color = '#ffffff';
+  select.style.size = '15px';
   countries.forEach(country => {
     const option = document.createElement('option');
     option.value = country.code;
     option.textContent = `${country.name} (${country.code})`;
     option.setAttribute('data-flag', country.flag);
+    // Style the option elements
+    option.style.backgroundColor = '#1a1a1a';
+    option.style.color = '#ffffff';
     select.appendChild(option);
   });
 
   select.addEventListener('change', (e) => {
     const selectedOption = e.target.options[e.target.selectedIndex];
     const flagPath = selectedOption.getAttribute('data-flag');
-    // Update flag image if needed
   });
 }
+
 
 // Add this to your existing DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {

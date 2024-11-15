@@ -78,6 +78,9 @@ function validateAndProceed() {
     console.log('Form submission data:', formData);
     // Add your API call here
     alert('Form submitted successfully!');
+
+    window.location.href = 'successpage.html';
+
   }
   
   function isValidEmail(email) {
